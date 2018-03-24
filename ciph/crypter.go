@@ -6,7 +6,6 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"io"
-
 	"github.com/zhooq/go-ethereum/crypto/sha3"
 )
 

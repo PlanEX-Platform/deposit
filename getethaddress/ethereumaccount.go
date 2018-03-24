@@ -13,7 +13,10 @@ var acc = &accounts.AccountSchema{}
 
 func GetAddress(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	acc.Init()
-	acc, _ := acc.ByID(ps.ByName("id"))
+	acc, err := acc.ByID(ps.ByName("id"))
+	if err != nil {
+		logger.Log.Panic(err)
+	}
 	values := map[string]string{"account": acc.EthAddress}
 	jsonValue, _ := json.Marshal(values)
 	fmt.Fprint(w, string(jsonValue))

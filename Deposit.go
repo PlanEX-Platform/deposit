@@ -1,7 +1,6 @@
 package main
 
 import (
-	"eth-deposit/config"
 	"fmt"
 	"github.com/howeyc/gopass"
 	"eth-deposit/accounts"
@@ -12,14 +11,18 @@ import (
 	"eth-deposit/getethaddress"
 	"log"
 	"net/http"
+	"eth-deposit/config"
 )
 
 const (
 	VERSION = "0.01"
 )
 
+func init() {
+	config.Load()
+}
+
 func main() {
-	setup()
 
 	fmt.Printf("Database password: ")
 	pass, _ := gopass.GetPasswd()
@@ -34,15 +37,4 @@ func main() {
 	router.GET("/account/:id", getethaddress.GetAddress)
 
 	log.Fatal(http.ListenAndServe(":9010", router))
-}
-
-
-func setup() {
-	config.CFG = new(config.Config)
-
-	// Database config
-	config.CFG.DBAddr = "localhost:5432"
-	config.CFG.DBName = "hirama"
-	config.CFG.DBUser = "hirama"
-	config.CFG.DBPassword = "hirama"
 }

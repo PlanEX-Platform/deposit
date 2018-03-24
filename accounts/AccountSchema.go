@@ -4,17 +4,17 @@ import (
 	"encoding/hex"
 	"fmt"
 	"eth-deposit/ciph"
-	"eth-deposit/config"
 	"github.com/go-pg/pg"
 	"github.com/rkuris/go.uuid"
 	"github.com/zhooq/go-ethereum/crypto"
+	"github.com/spf13/viper"
 )
 
 var KEY string
 
 type Account struct {
 	ID         string
-	PlanexID    string
+	PlanexID   string
 	EthAddress string
 	Balance    string
 	KeyStore   string
@@ -46,10 +46,10 @@ func (schema *AccountSchema) Init() (*pg.DB, error) {
 	var db *pg.DB
 	if schema.db == nil {
 		db := pg.Connect(&pg.Options{
-			Addr:     config.CFG.DBAddr,
-			Database: config.CFG.DBName,
-			User:     config.CFG.DBUser,
-			Password: config.CFG.DBPassword,
+			Addr:     viper.GetString("dbhost"),
+			Database: viper.GetString("database"),
+			User:     viper.GetString("user"),
+			Password: viper.GetString("password"),
 		})
 		schema.db = db
 		for _, model := range []interface{}{&Account{}} {
@@ -66,7 +66,7 @@ func (schema *AccountSchema) Create(planexID string, ethAddress string, PrivKey 
 	ciphText, nonce, _ := ciph.Encrypt(PrivKey, KEY)
 	newAcc := &Account{
 		ID:         uuid.NewV4().String(),
-		PlanexID:    planexID,
+		PlanexID:   planexID,
 		EthAddress: ethAddress,
 		Balance:    "0",
 		KeyStore:   ciphText,
