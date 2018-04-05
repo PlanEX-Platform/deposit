@@ -3,15 +3,15 @@ package main
 import (
 	"fmt"
 	"github.com/howeyc/gopass"
-	"eth-deposit/accounts"
+	"deposit/accounts"
 	"os"
-	"eth-deposit/logger"
+	"deposit/logger"
 	"runtime"
 	"github.com/julienschmidt/httprouter"
-	"eth-deposit/getethaddress"
+	"deposit/getethaddress"
 	"log"
 	"net/http"
-	"eth-deposit/config"
+	"deposit/config"
 )
 
 const (
