@@ -3,7 +3,7 @@ package accounts
 import (
 	"encoding/hex"
 	"fmt"
-	"eth-deposit/ciph"
+	"deposit/ciph"
 	"github.com/go-pg/pg"
 	"github.com/rkuris/go.uuid"
 	"github.com/zhooq/go-ethereum/crypto"
@@ -63,6 +63,7 @@ func (schema *AccountSchema) Init() (*pg.DB, error) {
 }
 
 func (schema *AccountSchema) Create(planexID string, ethAddress string, PrivKey string) (Account, error) {
+	KEY := viper.GetString("db_encryption_pass")
 	ciphText, nonce, _ := ciph.Encrypt(PrivKey, KEY)
 	newAcc := &Account{
 		ID:         uuid.NewV4().String(),

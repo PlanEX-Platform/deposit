@@ -1,17 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"github.com/howeyc/gopass"
-	"eth-deposit/accounts"
+	//"fmt"
+	//"github.com/howeyc/gopass"
+	//"deposit/accounts"
 	"os"
-	"eth-deposit/logger"
+	"deposit/logger"
 	"runtime"
 	"github.com/julienschmidt/httprouter"
-	"eth-deposit/getethaddress"
+	"deposit/getethaddress"
 	"log"
 	"net/http"
-	"eth-deposit/config"
+	"deposit/config"
+	//"github.com/spf13/viper"
 )
 
 const (
@@ -23,13 +24,12 @@ func init() {
 }
 
 func main() {
+	//fmt.Printf("Database password: ")
+	// pass, _ := gopass.GetPasswd()
 
-	fmt.Printf("Database password: ")
-	pass, _ := gopass.GetPasswd()
-
-	if len(pass) > 1 {
-		accounts.KEY = string(pass)
-	}
+	//if len(pass) > 1 {
+	//	accounts.KEY = string(pass)
+	//}
 
 	logger.Log.Printf("Server v%s pid=%d started with processes: %d", VERSION, os.Getpid(), runtime.GOMAXPROCS(runtime.NumCPU()))
 

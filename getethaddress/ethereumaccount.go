@@ -4,9 +4,9 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"encoding/json"
 	"fmt"
-	"eth-deposit/accounts"
+	"deposit/accounts"
 	"net/http"
-	"eth-deposit/logger"
+	"deposit/logger"
 )
 
 var acc = &accounts.AccountSchema{}
